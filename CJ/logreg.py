@@ -37,7 +37,6 @@ results_df = pd.DataFrame({
     'Accuracy': accuracy
 })
 
-# Plot
 plt.figure(figsize=(9, 9))
 sns.lineplot(x='Regularization Strength (C)', y='Accuracy', data=results_df, marker='o')
 plt.xscale('log')

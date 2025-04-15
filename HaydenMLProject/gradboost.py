@@ -6,11 +6,11 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 # Load the data
 train_features = pd.read_csv('train_features.csv')
-train_features = train_features.drop(train_features.columns[0], axis=1)
+train_features = train_features.drop(train_features.columns[[0,1]], axis=1)
 train_labels = pd.read_csv('train_labels.csv')
 
 test_features = pd.read_csv('test_features.csv')
-test_features = test_features.drop(test_features.columns[0], axis=1)
+test_features = test_features.drop(test_features.columns[[0,1]], axis=1)
 test_features = test_features.dropna()
 test_labels = pd.read_csv('test_labels.csv')
 

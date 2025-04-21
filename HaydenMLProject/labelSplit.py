@@ -17,7 +17,7 @@ def separate_labels(input_csv, labels_csv, features_csv):
     print(f"Features saved to: {features_csv}")
 
 # Example usage:
-input_csv = 'training_data_flattened.csv'  # Path to your input CSV file
+input_csv = 'combined_data_flattened.csv'  # Path to your input CSV file
 labels_csv = 'train_labels.csv'     # Path where the labels CSV should be saved
 features_csv = 'train_features.csv' # Path where the features CSV should be saved
 

@@ -32,7 +32,7 @@ def evaluate_hyperparameter(param_name, param_values, base_params, plot_title):
         params = base_params.copy()
         params[param_name] = value
 
-        # Metrics across folds
+        # Lists to hold metrics for each fold
         fold_train_rmse, fold_val_rmse = [], []
         fold_train_mae, fold_val_mae = [], []
         fold_train_r2, fold_val_r2 = [], []
@@ -54,7 +54,7 @@ def evaluate_hyperparameter(param_name, param_values, base_params, plot_title):
             y_train_pred = bst.predict(dtrain)
             y_val_pred = bst.predict(dval)
 
-            # Compute metrics
+            # Compute and store metrics
             fold_train_rmse.append(np.sqrt(mean_squared_error(y_train, y_train_pred)))
             fold_val_rmse.append(np.sqrt(mean_squared_error(y_val, y_val_pred)))
 
@@ -64,24 +64,39 @@ def evaluate_hyperparameter(param_name, param_values, base_params, plot_title):
             fold_train_r2.append(r2_score(y_train, y_train_pred))
             fold_val_r2.append(r2_score(y_val, y_val_pred))
 
-        # Aggregate mean of metrics across folds
-        train_rmse = np.mean(fold_train_rmse)
-        val_rmse = np.mean(fold_val_rmse)
-        train_mae = np.mean(fold_train_mae)
-        val_mae = np.mean(fold_val_mae)
-        train_r2 = np.mean(fold_train_r2)
-        val_r2 = np.mean(fold_val_r2)
+        # Means and STDs
+        train_rmse_mean = np.mean(fold_train_rmse)
+        train_rmse_std = np.std(fold_train_rmse)
 
-        train_rmse_values.append(train_rmse)
-        val_rmse_values.append(val_rmse)
+        val_rmse_mean = np.mean(fold_val_rmse)
+        val_rmse_std = np.std(fold_val_rmse)
+
+        train_mae_mean = np.mean(fold_train_mae)
+        train_mae_std = np.std(fold_train_mae)
+
+        val_mae_mean = np.mean(fold_val_mae)
+        val_mae_std = np.std(fold_val_mae)
+
+        train_r2_mean = np.mean(fold_train_r2)
+        train_r2_std = np.std(fold_train_r2)
+
+        val_r2_mean = np.mean(fold_val_r2)
+        val_r2_std = np.std(fold_val_r2)
+
+        train_rmse_values.append(train_rmse_mean)
+        val_rmse_values.append(val_rmse_mean)
 
         # Print metrics
         print(f"{param_name} = {value}")
-        print(f"  Train -> RMSE: {train_rmse:.4f}, MAE: {train_mae:.4f}, R²: {train_r2:.4f}")
-        print(f"  Val   -> RMSE: {val_rmse:.4f}, MAE: {val_mae:.4f}, R²: {val_r2:.4f}")
+        print(f"  Train -> RMSE: {train_rmse_mean:.4f} ± {train_rmse_std:.4f}, "
+              f"MAE: {train_mae_mean:.4f} ± {train_mae_std:.4f}, "
+              f"R²: {train_r2_mean:.4f} ± {train_r2_std:.4f}")
+        print(f"  Val   -> RMSE: {val_rmse_mean:.4f} ± {val_rmse_std:.4f}, "
+              f"MAE: {val_mae_mean:.4f} ± {val_mae_std:.4f}, "
+              f"R²: {val_r2_mean:.4f} ± {val_r2_std:.4f}")
         print("")
 
-    # Plotting RMSE only
+    # Plotting RMSE means
     plt.figure(figsize=(10, 6))
     plt.plot(param_values, train_rmse_values, label='Training RMSE', marker='o')
     plt.plot(param_values, val_rmse_values, label='Validation RMSE', marker='o')

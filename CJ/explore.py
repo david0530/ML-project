@@ -13,6 +13,7 @@ y_test = test_df["Label"]
 
 plt.figure(figsize = (9,9))
 sns.histplot(y_train, bins = 30)
-plt.show()
+plt.title("Histogram of labels")
+plt.savefig("hist.png", dpi=300)
 
 

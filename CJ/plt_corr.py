@@ -18,7 +18,7 @@ sns.heatmap(train_corr, xticklabels=True, yticklabels=True)
 plt.xticks(fontsize=5)
 plt.yticks(fontsize=5)
 plt.title("Train data pearson correlation heatmap")
-plt.show()
+plt.savefig("Heatmap.png", dpi=300)
 
 test_corr = train_df.corr(method = "pearson")
 

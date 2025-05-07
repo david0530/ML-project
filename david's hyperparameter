@@ -1,0 +1,54 @@
+CNN
+      BEST_PARAMS = {
+        "lr": 0.0008541573089003908,
+        "weight_decay": 1.3019436115222876e-06,
+        "num_conv_layers": 2,
+        "conv_filters": [32, 80],
+        "kernel_size": 3,
+        "pool_kernel_size": 2,
+        "dropout_rate": 0.5324199600776116,
+        "num_fc_layers": 2,
+        "fc_neurons": 256
+    }
+
+best_svr_params = {
+    'C': 69.91947034294083,
+    'epsilon': 0.4159126142111952,
+    'gamma': 0.0011117265099859668,
+    'kernel': 'rbf'
+}
+
+# For XGBoost (already correct based on your input)
+best_xgb_params = {
+    'colsample_bytree': 0.6592347719813599,
+    'gamma': 0.49887024252447093,
+    'learning_rate': 0.005248484938541596,
+    'max_depth': 4,
+    'min_child_weight': 2,
+    'n_estimators': 319,
+    'subsample': 0.6205915004999957
+    # 'random_state' will be added during the call if needed by the model function
+}
+
+# For MLP (Updated with your best parameters)
+best_mlp_params = {
+    'activation': 'tanh',
+    'alpha': 0.09660837987292169,
+    'batch_size': 64, # Note: Used internally by sklearn solvers supporting mini-batches.
+    'early_stopping': True,
+    'hidden_layer_sizes': (50, 30), # From your optimization results
+    'learning_rate_init': 0.0013079372456989604,
+    'n_iter_no_change': 20,
+    'solver': 'adam',
+    'max_iter': 1000, # Setting a reasonable max iteration limit
+    'verbose': False # Set to True to see training progress
+    # 'random_state' will be passed separately for reproducibility
+}
+GNN
+      batch_size = 16
+    n_epochs = 1000
+    gcn_hidden_dim = 512
+    l2_reg = 0.0002700886730263278
+    learning_rate = 0.0006598312663708915
+    dropout_rate = 0.18623091924201232
+  
